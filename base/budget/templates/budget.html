@@ -1,0 +1,118 @@
+{% extends "base_template.html" %}
+{% block title %} Index {% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row" style="margin-top: 3%">
+        <div class="col" style="text-align: left;">
+            <p style="font-size: xx-large;font-weight: bold">Расходы c ... по ...</p>
+        </div>
+        <div class="col" style="
+            text-align: right;
+            vertical-align: middle;
+            display: flex;
+            justify-content: flex-end;
+            align-content: center;
+            align-items: center;
+            ">
+            <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#add_item">Добавить
+            </button>
+        </div>
+    </div>
+    <!-- взять первое число месяца и сегодняшнюю дату -->
+</div>
+
+<div class="container">
+    <table class="table table-striped table-hover">
+        <thead>
+        {% for element in columns %}
+        <th>{{ element }}</th>
+        {% endfor %}
+        </thead>
+        <tbody>
+        {% for item in items %}
+        <tr>
+            {% for name in item %}
+            <td>{{name}}</td>
+            {% endfor %}
+            <td>
+                Изменить
+                Удалить
+            </td>
+        </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+
+
+<!-- Вертикально центрированное прокручиваемое модальное окно -->
+<!--<div style="height: 0">-->
+<div class="modal fade" id="add_item" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Добавить строку в таблицу расходов</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+            </div>
+
+            <div class="modal-body">
+                <form method="post" action="additems/">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="categorySelect" class="form-label">Выберите категорию</label>
+                        <select class="form-select" id="categorySelect" name="category_item">
+                            <option value="0" selected>Мясо</option>
+                            <option value="1">Яйца</option>
+                            <option value="2">Молочные продукты</option>
+                            <option value="3">Хлебобулочные изделия</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="nameItemBudget" class="form-label">Название</label>
+                        <input type="text" class="form-control" id="nameItemBudget" name="c"
+                               placeholder="Введите название продукта">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="countItemBudget" class="form-label">Количество</label>
+                        <input type="number" min="0" class="form-control" id="countItemBudget" name="count_item"
+                               placeholder="Укажите количество продукта">
+                    </div>
+                    <div class="mb-3">
+                        <label for="measurementSelect" class="form-label">Выберите измерение</label>
+                        <select class="form-select" id="measurementSelect" name="measurement_item">
+                            <option value="0" selected>шт</option>
+                            <option value="1">гр</option>
+                            <option value="2">кг</option>
+                            <option value="3">л</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="priceItemBudget" class="form-label">Цена в рублях</label>
+                        <input type="number" min="0" class="form-control" id="priceItemBudget" name="price_item"
+                               placeholder="Введите стоимость">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="dateItemBudget" class="form-label">Дата покупки</label>
+                        <input type="date" class="form-control" id="dateItemBudget" name="date_item">
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                        <input type="submit"  class="btn btn-primary" value="Добавить">
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

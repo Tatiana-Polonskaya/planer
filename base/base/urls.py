@@ -16,8 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from schedule import views as sc_view
+from budget import views as bud_view
 
 urlpatterns = [
     path('',sc_view.index),
+    path('budget/additems/',bud_view.additems),
+    path('budget/',bud_view.index),
     path('admin/', admin.site.urls),
 ]
