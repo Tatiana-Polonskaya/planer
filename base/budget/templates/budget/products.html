@@ -1,0 +1,13 @@
+{% extends "schedule/base_template.html" %}
+{% load static %}
+{% block title %} Product {% endblock title %}
+
+{% block content %}
+    {% for product in object_list%}
+        <a href="{% url 'detail' product.id %}"><h3>{{ product.name }}</h3></a>
+        <h4>{{product.date|date:"d-m-Y"}}</h4>
+
+    {% endfor %}
+
+
+{% endblock content %}

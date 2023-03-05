@@ -14,13 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from schedule import views as sc_view
-from budget import views as bud_view
+from django.urls import path,re_path
+from django.conf.urls import include
+
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-    path('',sc_view.index),
-    path('budget/additems/',bud_view.additems),
-    path('budget/',bud_view.index),
+    re_path(r'^$',include('schedule.urls')),
+    re_path(r'^budget/',include('budget.urls')),
     path('admin/', admin.site.urls),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,5 +1,6 @@
-{% extends "base_template.html" %}
-{% block title %} Index {% endblock title %}
+{% extends "schedule/base_template.html" %}
+{% load static %}
+{% block title %} Budget {% endblock title %}
 
 {% block content %}
 <div class="container">
@@ -36,8 +37,8 @@
             <td>{{name}}</td>
             {% endfor %}
             <td>
-                Изменить
-                Удалить
+                <img class="icon" src='{% static "images/pencil.svg" %}' alt="Изменить" width="20"/>
+                <img class="icon" src='{% static "images/trash.svg" %}' alt="Удалить" width="20"/>
             </td>
         </tr>
         {% endfor %}
@@ -49,6 +50,7 @@
 
 <!-- Вертикально центрированное прокручиваемое модальное окно -->
 <!--<div style="height: 0">-->
+
 <div class="modal fade" id="add_item" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -58,49 +60,55 @@
             </div>
 
             <div class="modal-body">
-                <form method="post" action="additems/">
+<!--      action="/budget/additems/"          -->
+                <form method="post" >
                     {% csrf_token %}
-                    <div class="mb-3">
-                        <label for="categorySelect" class="form-label">Выберите категорию</label>
-                        <select class="form-select" id="categorySelect" name="category_item">
-                            <option value="0" selected>Мясо</option>
-                            <option value="1">Яйца</option>
-                            <option value="2">Молочные продукты</option>
-                            <option value="3">Хлебобулочные изделия</option>
-                        </select>
-                    </div>
 
-                    <div class="mb-3">
-                        <label for="nameItemBudget" class="form-label">Название</label>
-                        <input type="text" class="form-control" id="nameItemBudget" name="c"
-                               placeholder="Введите название продукта">
-                    </div>
+                    {{ form.name }}
+                    {{ form.date }}
+                    <span>{{ error }}</span>
 
-                    <div class="mb-3">
-                        <label for="countItemBudget" class="form-label">Количество</label>
-                        <input type="number" min="0" class="form-control" id="countItemBudget" name="count_item"
-                               placeholder="Укажите количество продукта">
-                    </div>
-                    <div class="mb-3">
-                        <label for="measurementSelect" class="form-label">Выберите измерение</label>
-                        <select class="form-select" id="measurementSelect" name="measurement_item">
-                            <option value="0" selected>шт</option>
-                            <option value="1">гр</option>
-                            <option value="2">кг</option>
-                            <option value="3">л</option>
-                        </select>
-                    </div>
+<!--                    <div class="mb-3">-->
+<!--                        <label for="categorySelect" class="form-label">Выберите категорию</label>-->
+<!--                        <select class="form-select" id="categorySelect" name="category_item">-->
+<!--                            <option value="0" selected>Мясо</option>-->
+<!--                            <option value="1">Яйца</option>-->
+<!--                            <option value="2">Молочные продукты</option>-->
+<!--                            <option value="3">Хлебобулочные изделия</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
 
-                    <div class="mb-3">
-                        <label for="priceItemBudget" class="form-label">Цена в рублях</label>
-                        <input type="number" min="0" class="form-control" id="priceItemBudget" name="price_item"
-                               placeholder="Введите стоимость">
-                    </div>
+<!--                    <div class="mb-3">-->
+<!--                        <label for="nameItemBudget" class="form-label">Название</label>-->
+<!--                        <input type="text" class="form-control" id="nameItemBudget" name="name_item"-->
+<!--                               placeholder="Введите название продукта">-->
+<!--                    </div>-->
 
-                    <div class="mb-3">
-                        <label for="dateItemBudget" class="form-label">Дата покупки</label>
-                        <input type="date" class="form-control" id="dateItemBudget" name="date_item">
-                    </div>
+<!--                    <div class="mb-3">-->
+<!--                        <label for="countItemBudget" class="form-label">Количество</label>-->
+<!--                        <input type="number" min="0" class="form-control" id="countItemBudget" name="count_item"-->
+<!--                               placeholder="Укажите количество продукта">-->
+<!--                    </div>-->
+<!--                    <div class="mb-3">-->
+<!--                        <label for="measurementSelect" class="form-label">Выберите измерение</label>-->
+<!--                        <select class="form-select" id="measurementSelect" name="measurement_item">-->
+<!--                            <option value="0" selected>шт</option>-->
+<!--                            <option value="1">гр</option>-->
+<!--                            <option value="2">кг</option>-->
+<!--                            <option value="3">л</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+
+<!--                    <div class="mb-3">-->
+<!--                        <label for="priceItemBudget" class="form-label">Цена в рублях</label>-->
+<!--                        <input type="number" min="0" class="form-control" id="priceItemBudget" name="price_item"-->
+<!--                               placeholder="Введите стоимость">-->
+<!--                    </div>-->
+
+<!--                    <div class="mb-3">-->
+<!--                        <label for="dateItemBudget" class="form-label">Дата покупки</label>-->
+<!--                        <input type="date" class="form-control" id="dateItemBudget" name="date_item">-->
+<!--                    </div>-->
 
 
                     <div class="modal-footer">

@@ -1,0 +1,16 @@
+{% extends "schedule/base_template.html" %}
+{% load static %}
+{% block title %} Product {{ product.id }} {% endblock title %}
+
+{% block content %}
+
+<h1>{{ product.name }}</h1>
+<h4>{{product.date|date:"d-m-Y"}}</h4>
+
+
+<form method="post" action="{% url 'delete-product' product.pk %}">
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+</form>
+
+{% endblock content %}
